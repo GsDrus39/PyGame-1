@@ -1,10 +1,6 @@
 import pygame
+from game import Game
 
 if __name__ == '__main__':
     pygame.init()
-    size = width, height = 800, 600
-    screen = pygame.display.set_mode(size)
-    pygame.display.flip()
-    while pygame.event.wait().type != pygame.QUIT:
-        print('killed')
-    pygame.quit()
+    game = Game()
