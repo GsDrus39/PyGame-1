@@ -1,1 +1,3 @@
-import pygame
+from sprites import BackGround
+
+background = BackGround()

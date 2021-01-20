@@ -1,26 +1,31 @@
 import pygame
+import test
+import keys
+from sprites import *
 
 
 class Game:
-    def __init__(self):
+    UP = 0
+    DOWN = 1
+    LEFT = 2
+    RIGHT = 3
+    """Класс игры"""  # TODO Начать писать хоть какую-то документацию, пока не слишком стало поздно
+    def __init__(self, screen):
+        self.all_sprites = pygame.sprite.Group()
+        self.all_objects = pygame.sprite.Group()
+        self.all_without_player = pygame.sprite.Group()  # уверен, есть более красивый способ сделать всё это
         self.fps = 60
-        self.time = 1
         self.running = True
-        pygame.init()
-        self.size = width, height = 500, 500
-        self.screen = pygame.display.set_mode(self.size)
+        self.screen = screen
+        self.background = BackGround(self.all_sprites)
+        self.load_level()
+        self.player = Player(self.all_sprites)
+        self.all_sprites.draw(self.screen)
         pygame.display.flip()
-        while self.running:
-            pass
 
     def load_level(self):
-        import levels.test
+        self.background.setup('levels/test/back.png')
+        self.all_sprites.draw(self.screen)
 
-
-
-
-    def pause(self):
-        pass
-
-    def unpause(self):
+    def update(self):
         pass
