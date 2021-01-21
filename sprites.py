@@ -32,8 +32,6 @@ class Player(Entity):
         x, y = pygame.mouse.get_pos()
 
 
-
-
 class Enemy(Entity):
     pass
 
