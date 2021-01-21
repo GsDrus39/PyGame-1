@@ -4,7 +4,7 @@ import keys
 from sprites import *
 
 
-def check_obstacle(x1, y1, x2, y2):  # TODO сделать метод определения наличия препятствия между двумя точками
+def check_obstacle(x1, y1, x2, y2):  # TODO сделать метод определения наличия препятствия между двумя точками (Glepp to Pasha)
     return False
 
 
