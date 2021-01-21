@@ -4,12 +4,17 @@ import keys
 from sprites import *
 
 
+def check_obstacle(x1, y1, x2, y2):  # TODO сделать метод определения наличия препятствия между двумя точками
+    return False
+
+
 class Game:
     UP = 0
     DOWN = 1
     LEFT = 2
     RIGHT = 3
     """Класс игры"""  # TODO Начать писать хоть какую-то документацию, пока не слишком стало поздно
+
     def __init__(self, screen):
         self.all_sprites = pygame.sprite.Group()
         self.all_objects = pygame.sprite.Group()
