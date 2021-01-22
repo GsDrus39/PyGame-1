@@ -2,21 +2,47 @@ import pygame
 from game import Game
 import keys
 
-UPDATE_SCREEN = pygame.USEREVENT + 1
+
 if __name__ == '__main__':
     pygame.init()
     SIZE = 800, 600
     SCREEN = pygame.display.set_mode(SIZE)
-    FPS = 16 # Миллисекунд между обновлениями
     pygame.display.flip()
     game = Game(SCREEN)
-    pause = False
+
+    # Event'ы и всё связанное с ними
+    FPS = 16    # Миллисекунд между обновлениями
+    SPEED = 16  # Время между тиками игры (тоже миллисекунды)
+
+    UPDATE_SCREEN_EVENT = pygame.USEREVENT + 1  # Эвент обновление экрана
+    pygame.time.set_timer(UPDATE_SCREEN_EVENT, FPS)
+    UPDATE_GAME_EVENT = pygame.USEREVENT + 2    # Эвент обновления игры
+    pygame.time.set_timer(UPDATE_GAME_EVENT, SPEED)
+
+    update_screen = False  # Обновление изображения в следующей итерации
+    update_game = False    # Обновление игры в следующей итерации
+    pause = False          # Внезапно, пауза
+
     while game.running:
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+            e_type = event.type
+
+            if e_type == pygame.QUIT:
                 exit(0)
-            elif event.type == pygame.KEYDOWN:
-                if event.type in keys.game_keys_list:
+
+            if e_type == pygame.KEYDOWN:
+                if e_type in keys.game_keys_list:
                     game.add_to_stack(event)
-            elif event.type == UPDATE_SCREEN:
-                pass
+
+            elif e_type == UPDATE_SCREEN_EVENT:
+                update_screen = True
+
+            elif e_type == UPDATE_GAME_EVENT:
+                update_game = True
+
+        if update_screen:
+            pygame.display.flip()
+            update_screen = False
+        if update_game:
+            game.update()
+            update_game = False
