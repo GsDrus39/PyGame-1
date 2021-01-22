@@ -2,6 +2,7 @@ import pygame
 import test
 import keys
 from sprites import *
+from log import logging
 
 
 def check_obstacle(x1, y1, x2, y2):  # TODO сделать метод определения наличия препятствия между двумя точками (Glepp to Pasha)
@@ -9,17 +10,15 @@ def check_obstacle(x1, y1, x2, y2):  # TODO сделать метод опред
 
 
 class Game:
-    UP = 0
-    DOWN = 1
-    LEFT = 2
-    RIGHT = 3
     """Класс игры"""  # TODO Начать писать хоть какую-то документацию, пока не слишком стало поздно
-
+    @logging
     def __init__(self, screen):
-        self.all_sprites = pygame.sprite.Group()
-        self.all_objects = pygame.sprite.Group()
-        self.all_without_player = pygame.sprite.Group()  # уверен, есть более красивый способ сделать всё это
-        self.fps = 60
+        self.stack = set()
+        self.all_sprites = pygame.sprite.Group()         # группа для всех спрайтов
+        self.all_objects = pygame.sprite.Group()         # группа для всех объектов(за исключением фоновых)
+        self.all_without_player = pygame.sprite.Group()  # группа для всего кроме игрока
+
+        # Должен быть способ сделать это без кучи почти не отличающихся групп. Но я не знаю, как (Pasha)
         self.running = True
         self.screen = screen
         self.background = BackGround(self.all_sprites)
@@ -28,9 +27,15 @@ class Game:
         self.all_sprites.draw(self.screen)
         pygame.display.flip()
 
+    @logging
     def load_level(self):
         self.background.setup('levels/test/back.png')
         self.all_sprites.draw(self.screen)
 
+    @logging
     def update(self):
         pass
+
+    @logging
+    def add_to_stack(self, action):
+        self.stack.add(action)
