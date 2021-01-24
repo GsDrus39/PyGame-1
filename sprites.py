@@ -56,7 +56,8 @@ class Player(Entity):
                 xm, ym = pygame.mouse.get_pos()
                 delta_x, delta_y = x - xm, y - ym  # координаты мыши относительно игрока
                 c = (x - xm) ** 2 + (y - ym) ** 2  # получаю расстояние между курсором и игроком
-                c /= self.speed                    # получаю коофициент подобия
+                c /= self.speed                    # получаю коофициент подоби
+                print('f')
                 # TODO Доделать логику. Глеб, не трогай, первую версию я склепаю сам
 
         self.stack.clear()
