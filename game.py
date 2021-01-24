@@ -23,7 +23,7 @@ class Game:
         self.screen = screen
         self.background = BackGround(self.all_sprites)
         self.__load_level()
-        self.player = Player(self.all_sprites)
+        self.player = Player(self.all_sprites, world=self.all_without_player)
         self.all_sprites.draw(self.screen)
         pygame.display.flip()
 
@@ -32,7 +32,7 @@ class Game:
         self.background.setup('levels/test/back.png')
         self.all_sprites.draw(self.screen)
 
-    @logging
+    #@logging
     def update(self):
         for event in self.stack:
             pass
